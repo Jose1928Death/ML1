@@ -10,6 +10,8 @@ public class automata : Agent
     public GameObject comida;
     public int velocidad;
     private Vector3 posOriginal;
+    private float MaxDistancia = 8.0f;
+    private float LeccionDistancia;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,9 @@ public class automata : Agent
     public override void OnEpisodeBegin()
     {
         transform.position = posOriginal;
+        LeccionDistancia = Academy.Instance.EnvironmentParameters.GetWithDefault("distancia_comida", MaxDistancia);
 
-        float posObj = Random.Range(-3.5f, 3.5f);
+        float posObj = Random.Range(LeccionDistancia*-1, LeccionDistancia);
         if(posObj > -0.5f && posObj < 0.0f)
         {
             posObj = posObj - 1;
